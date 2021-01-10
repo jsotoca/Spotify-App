@@ -12,11 +12,16 @@
   </div>
 </div>
 
-<div class="card-columns mt-4">
+<div  class="card-columns mt-4">
   <div class="card" *ngFor="let artist of artists" style="width: 18rem">
-    <img
+    <img *ngIf="artist['images'].length"
       class="card-img-top"
       [src]="artist.images[0].url"
+      alt="Card image cap"
+    />
+    <img *ngIf="!artist['images'].length"
+      class="card-img-top"
+      src="assets/img/noavatar.jpg"
       alt="Card image cap"
     />
     <div class="card-body">
