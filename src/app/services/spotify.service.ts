@@ -32,10 +32,16 @@ export class SpotifyService {
     });
   }
 
-  getArtist(value:string){
+  getArtists(value:string){
     return this.executeQuery(`search?q=${value}&type=artist`,(data:any)=>{
       return data['artists'].items;
     });
+  }
+
+  getArtist(id:string){
+    return this.executeQuery(`artists/${id}`,((data:any) => {
+      return data;
+    }))
   }
 
 }
