@@ -44,4 +44,10 @@ export class SpotifyService {
     }))
   }
 
+  getTopTracks(id:string){
+    return this.executeQuery(`artists/${id}/top-tracks?country=us`,((data:any) => {
+      return data.tracks;
+    }))
+  }
+
 }

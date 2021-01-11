@@ -10,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ArtistComponent implements OnInit {
 
   artist:any;
-  loading:boolean = true;
+  tracks:any;
+  loading:boolean;
 
   constructor(
     private activatedRoute:ActivatedRoute,
@@ -18,13 +19,24 @@ export class ArtistComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => this.getArtist(params['id']));
-    this.loading = false;
+    this.loading = true;
+    this.activatedRoute.params.subscribe(params => {
+      this.getArtist(params['id']);
+      this.getTopTracks(params['id']);
+    });
   }
 
   getArtist(id:string){
     this.spotifyService.getArtist(id).subscribe(artist => {
       this.artist = artist;
+      this.loading = false;
+    });
+  }
+
+  getTopTracks(id:string){
+    this.spotifyService.getTopTracks(id).subscribe(tracks => {
+      console.log(tracks);
+      this.tracks = tracks;
     });
   }
 
