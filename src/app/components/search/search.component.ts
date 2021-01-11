@@ -10,6 +10,7 @@ export class SearchComponent implements OnInit {
 
 
   artists: any[] = [];
+  loading: boolean;
 
   constructor(
     private spotifyService:SpotifyService
@@ -20,9 +21,10 @@ export class SearchComponent implements OnInit {
 
   search(value: string){
     this.artists = [];
+    this.loading = true;
     this.spotifyService.getArtist(value).subscribe((data:any) => {
-      console.log(data);
       this.artists = data;
+      this.loading = false;
     });
   }
 

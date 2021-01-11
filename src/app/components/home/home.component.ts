@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   newsSongs: any[] = [];
-
+  carga:boolean = true;
 
   constructor(
     private spotifyService:SpotifyService
@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.spotifyService.getNewRelease().subscribe( (data: any) => this.newsSongs = data);
+    this.carga = false;
   }
 
 }
