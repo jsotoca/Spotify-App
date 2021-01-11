@@ -18,7 +18,8 @@ export class SpotifyService {
   }
 
   executeQuery(query:string,transform:any){
-    return this.httpClient.get(query,{ headers:this.headers })
+    const url = `https://api.spotify.com/v1/${query}`;
+    return this.httpClient.get(url,{ headers:this.headers })
     .pipe(
       map( transform )
     );
@@ -26,13 +27,13 @@ export class SpotifyService {
 
 
   getNewRelease(){
-    return this.executeQuery('https://api.spotify.com/v1/browse/new-releases',(data:any)=>{
+    return this.executeQuery('browse/new-releases',(data:any)=>{
       return data['albums'].items;
     });
   }
 
   getArtist(value:string){
-    return this.executeQuery(`https://api.spotify.com/v1/search?q=${value}&type=artist`,(data:any)=>{
+    return this.executeQuery(`search?q=${value}&type=artist`,(data:any)=>{
       return data['artists'].items;
     });
   }
